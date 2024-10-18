@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
+.carousel-container {
+  max-width: 273px;
+  height: 333px;
+  margin: 0 auto;
+
+  .card-icon {
+    width: 249px;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 249px;
+      height: 178px;
+    }
+  }
+
+  .card {
+    background: url('../assets/mobile_card_bg.png');
+    background-size: cover;
+    box-sizing: border-box;
+    padding: 12px;
+    width: 273px !important;
+    height: 333px !important;
+    border-radius: 24px;
+
+    .card-title {
+      margin: 0;
+      font-family: Radio Canada;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 21.6px;
+      text-align: left;
+
+    }
+
+    .card-description {
+      margin: 0;
+      font-family: Radio Canada;
+      font-size: 14px;
+      font-weight: 200;
+      line-height: 16.8px;
+      text-align: left;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+  }
+}
+
+.card-content {}

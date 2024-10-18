@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
+
+.section-title-container {
+  .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    @media only screen and (max-width: 767px) {
+      gap: 8px;
+    }
+
+    p {
+      margin: 0;
+      height: 24px;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #00EFFF;
+
+      @media only screen and (max-width: 767px) {
+        font-family: Radio Canada;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 16.8px;
+        text-align: center;
+      }
+    }
+
+    .polygon {
+      @media only screen and (max-width: 767px) {
+        height: 10px;
+      }
+    }
+
+    .left-line,
+    .right-line {
+      @media only screen and (max-width: 767px) {
+        width: 60px;
+      }
+    }
+  }
+
+  .section-description {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      margin: 0;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 52px;
+      line-height: 62px;
+      text-align: center;
+      max-width: 845px;
+
+      background: linear-gradient(90deg, #DDF3FF 0%, #5394FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+
+      @media only screen and (max-width: 767px) {
+        width: 298px;
+        font-family: Radio Canada;
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 33.6px;
+        text-align: center;
+      }
+    }
+  }
+}
