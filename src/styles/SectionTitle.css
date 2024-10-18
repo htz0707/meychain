@@ -27,19 +27,16 @@
         font-weight: 500;
         line-height: 16.8px;
         text-align: center;
-      }
-    }
 
-    .polygon {
-      @media only screen and (max-width: 767px) {
-        height: 10px;
-      }
-    }
+        .polygon {
+          height: 10px;
+        }
 
-    .left-line,
-    .right-line {
-      @media only screen and (max-width: 767px) {
-        width: 60px;
+        .left-line,
+        .right-line {
+          width: 60px;
+
+        }
       }
     }
   }
