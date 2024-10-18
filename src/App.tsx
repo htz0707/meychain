@@ -234,7 +234,7 @@ const App: React.FC = () => {
             </button>
             <div className='demo'>
               <img src={demo} alt='demo' />
-              <span>Watch Demo</span>
+              <span>Read Docs</span>
             </div>
           </div>
         </div>
