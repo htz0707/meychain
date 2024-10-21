@@ -1,73 +1,106 @@
-import React from 'react';
-import '../styles/Header.css';
-import logo from '../assets/logo.svg';
-import { useAccount, useConnect, useDisconnect, useBalance } from "wagmi";
-import { InjectedConnector } from "wagmi/connectors/injected";
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
 
-const Header: React.FC = () => {
-  const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
-  const { disconnect } = useDisconnect();
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 80px;
 
-  const { data: balance } = useBalance({
-    address: address,
-    watch: true,
-  });
-  return (
-    <header className='header'>
-      <div className='container'>
-        <nav>
-          <ul className='nav-list'>
-            <li className='logo-container'>
-              <a href='#' className='nav-link'>
-                <div><img src={logo} alt='Logo' className='logo' /></div>
-              </a>
-            </li>
-            <li className='desktop-link'>
-              <a href='#' className='nav-link'>
-                Why MeyFi
-              </a>
-            </li>
-            <li className='desktop-link'>
-              <a href='#' className='nav-link'>
-                Features
-              </a>
-            </li>
-            <li className='desktop-link'>
-              <a href='#' className='nav-link'>
-                How it work
-              </a>
-            </li>
-            <li className='desktop-link'>
-              <a href='#' className='nav-link'>
-                About
-              </a>
-            </li>
-            <li className='desktop-link'>
-              <a href='#' className='nav-link'>
-                Docs
-              </a>
-            </li>
-          </ul>
-        </nav>
-        {isConnected ? (
-          <>
-            <p>
-              <span className='show-balance'>
-                Id: {!!address && `${address.slice(0, 4)}...${address.slice(-3)} - Balance: `}
-              </span>
-              <span>{balance?.formatted} {balance?.symbol}</span>
-            </p>
-            <button onClick={() => disconnect()} className='connect-wallet'>Disconnect Wallet</button>
-          </>
-        ) : (
-          <button onClick={() => connect()} className='connect-wallet'>Connect Wallet</button>
-        )}
-      </div>
-    </header>
-  );
-};
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    padding: 0 20px;
+  }
 
-export default Header;
+  @media only screen and (max-width: 767px) {
+    padding: 0 16px;
+  }
+
+  background: #000000E5;
+}
+
+.container {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media only screen and (max-width: 767px) {
+    height: 60px;
+  }
+}
+
+.logo-container {
+  margin-right: 32px;
+  display: flex;
+
+  @media only screen and (max-width: 767px) {
+    margin: unset;
+  }
+
+  .logo {
+    width: 100%;
+  }
+}
+
+h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  margin-left: 24px;
+
+  @media only screen and (max-width: 767px) {
+    margin: unset;
+  }
+
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+.connect-wallet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 23px;
+  background: radial-gradient(53.36% 100% at 50% 99.19%, #00BCD4 0%, #0047FF 100%);
+  box-shadow: inset 1px 1px 1px rgba(239, 239, 239, 0.25);
+  border-radius: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
+}
+
+.connect-wallet:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  li.desktop-link {
+    display: none !important;
+  }
+}
+
+span.show-balance {
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+
+}
