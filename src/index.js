@@ -1,13 +1,57 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { WagmiConfig, createClient, configureChains } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { InjectedConnector } from "wagmi/connectors/injected";
+
+
+// Define BSC mainnet chain
+const bscChain = {
+  id: 56, // Chain ID for BSC mainnet
+  name: 'Binance Smart Chain',
+  network: 'bsc',
+  nativeCurrency: {
+    name: 'Binance Coin',
+    symbol: 'BNB',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://bsc-dataseed.binance.org/'],
+    },
+    public: {
+      http: ['https://bsc-dataseed.binance.org/'], // Same RPC URL for public
+    },
+  },
+  blockExplorers: {
+    default: { name: 'BscScan', url: 'https://bscscan.com' },
+  },
+};
+
+// Configure BSC chain with public provider
+const { chains, provider } = configureChains(
+  [bscChain],
+  [publicProvider()]
+);
+
+// Create wagmi client with BSC support
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors: [new InjectedConnector({ chains })],
+  provider,
+});
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <WagmiConfig client={wagmiClient}>
+      <App />
+    </WagmiConfig>
   </React.StrictMode>
 );
 

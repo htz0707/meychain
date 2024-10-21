@@ -37,7 +37,6 @@ import facebook from './assets/facebook.png';
 import twitter from './assets/twitter_2.png';
 import telegram from './assets/telegram.png';
 import instagram from './assets/instagram.png';
-
 import CarouselComponent from './components/CarouselComponent';
 
 const App: React.FC = () => {
