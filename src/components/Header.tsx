@@ -1,8 +1,20 @@
 import React from 'react';
 import '../styles/Header.css';
 import logo from '../assets/logo.svg';
+import { useAccount, useConnect, useDisconnect, useBalance } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
 
 const Header: React.FC = () => {
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+
+  const { data: balance } = useBalance({
+    address: address,
+    watch: true,
+  });
   return (
     <header className='header'>
       <div className='container'>
@@ -23,7 +35,7 @@ const Header: React.FC = () => {
                 Features
               </a>
             </li>
-            <li className='desktop-link'> 
+            <li className='desktop-link'>
               <a href='#' className='nav-link'>
                 How it work
               </a>
@@ -31,7 +43,7 @@ const Header: React.FC = () => {
             <li className='desktop-link'>
               <a href='#' className='nav-link'>
                 About
-              </a>  
+              </a>
             </li>
             <li className='desktop-link'>
               <a href='#' className='nav-link'>
@@ -40,7 +52,13 @@ const Header: React.FC = () => {
             </li>
           </ul>
         </nav>
-        <button className='connect-wallet'>Connect Wallet</button>
+        {isConnected ? (
+          <>
+            <p className='show-balance'>Id: {!!address && `${address.slice(0, 4)}...${address.slice(-3)} - Balance: `}</p><span>{balance?.formatted} {balance?.symbol}</span>
+            <button onClick={() => disconnect()} className='connect-wallet'>Disconnect Wallet</button>
+          </>
+        ) : (<button onClick={() => connect()} className='connect-wallet'>Connect Wallet</button>)}
+
       </div>
     </header>
   );

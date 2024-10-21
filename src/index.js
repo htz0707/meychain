@@ -1,13 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import { WagmiConfig, createClient, configureChains } from "wagmi";
+import { mainnet, goerli } from "wagmi/chains";
+import { publicProvider } from "wagmi/providers/public";
+import { InjectedConnector } from "wagmi/connectors/injected";
+
+// Cấu hình chains và provider
+const { provider, webSocketProvider } = configureChains(
+  [mainnet, goerli],
+  [publicProvider()]
+);
+
+// Tạo WagmiClient
+const client = createClient({
+  autoConnect: true,
+  connectors: [
+    new InjectedConnector({
+      chains: [mainnet, goerli],
+    }),
+  ],
+  provider,
+  webSocketProvider,
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <WagmiConfig client={client}>
+      <App />
+    </WagmiConfig>
   </React.StrictMode>
 );
 
