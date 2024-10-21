@@ -54,11 +54,17 @@ const Header: React.FC = () => {
         </nav>
         {isConnected ? (
           <>
-            <p className='show-balance'>Id: {!!address && `${address.slice(0, 4)}...${address.slice(-3)} - Balance: `}</p><span>{balance?.formatted} {balance?.symbol}</span>
+            <p>
+              <span className='show-balance'>
+                Id: {!!address && `${address.slice(0, 4)}...${address.slice(-3)} - Balance: `}
+              </span>
+              <span>{balance?.formatted} {balance?.symbol}</span>
+            </p>
             <button onClick={() => disconnect()} className='connect-wallet'>Disconnect Wallet</button>
           </>
-        ) : (<button onClick={() => connect()} className='connect-wallet'>Connect Wallet</button>)}
-
+        ) : (
+          <button onClick={() => connect()} className='connect-wallet'>Connect Wallet</button>
+        )}
       </div>
     </header>
   );
