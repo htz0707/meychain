@@ -6,46 +6,10 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import { publicProvider } from "wagmi/providers/public";
 import { Chain } from 'wagmi';
 
-// Define BSC mainnet chain
-const bscChain: Chain = {
-  id: 56, // Chain ID for BSC mainnet
-  name: 'Binance Smart Chain',
-  network: 'bsc',
-  nativeCurrency: {
-    name: 'Binance Coin',
-    symbol: 'BNB',
-    decimals: 18,
-  },
-  rpcUrls: {
-    default: {
-      http: ['https://bsc-dataseed.binance.org/'],
-    },
-    public: {
-      http: ['https://bsc-dataseed.binance.org/'], // Same RPC URL for public
-    },
-  },
-  blockExplorers: {
-    default: { name: 'BscScan', url: 'https://bscscan.com' },
-  },
-};
-
-// Configure BSC chain with public provider
-const { chains, provider } = configureChains(
-  [bscChain],
-  [publicProvider()]
-);
-
-// Create wagmi client with BSC support
-const wagmiClient = createClient({
-  autoConnect: true,
-  connectors: [new InjectedConnector({ chains })],
-  provider,
-});
-
 const Header: React.FC = () => {
   const { address, isConnected } = useAccount();
   const { connect } = useConnect({
-    connector: new InjectedConnector({ chains }),
+    connector: new InjectedConnector({ }),
   });
   const { disconnect } = useDisconnect();
 
@@ -55,7 +19,6 @@ const Header: React.FC = () => {
   });
 
   return (
-    <WagmiConfig client={wagmiClient}>
       <header className='header'>
         <div className='container'>
           <nav>
@@ -107,7 +70,6 @@ const Header: React.FC = () => {
           )}
         </div>
       </header>
-    </WagmiConfig>
   );
 };
 
